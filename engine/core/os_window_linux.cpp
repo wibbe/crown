@@ -28,7 +28,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 #if CROWN_PLATFORM_LINUX
 
 #include "os_window_linux.h"
-#include "assert.h"
+#include "crown_assert.h"
 #include "string_utils.h"
 #include "log.h"
 

@@ -27,7 +27,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 #pragma once
 
 #include "allocator.h"
-#include "assert.h"
+#include "crown_assert.h"
 #include "bundle.h"
 #include "file.h"
 #include "resource.h"

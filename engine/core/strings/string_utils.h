@@ -29,7 +29,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 #include <cstdio>
 #include <cstring>
 
-#include "assert.h"
+#include "crown_assert.h"
 #include "types.h"
 #include "config.h"
 #include "macros.h"

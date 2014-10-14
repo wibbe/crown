@@ -28,7 +28,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 #include "math_types.h"
 #include "vector3.h"
-#include "assert.h"
+#include "crown_assert.h"
 
 namespace crown
 {

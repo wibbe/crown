@@ -28,7 +28,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 #include <new>
 #include "types.h"
-#include "assert.h"
+#include "crown_assert.h"
 #include "allocator.h"
 #include "macros.h"
 

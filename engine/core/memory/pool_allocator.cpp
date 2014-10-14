@@ -25,7 +25,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 */
 
 #include "pool_allocator.h"
-#include "assert.h"
+#include "crown_assert.h"
 
 namespace crown
 {

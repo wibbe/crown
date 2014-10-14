@@ -31,7 +31,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 #include "bundle.h"
 #include "allocator.h"
 #include "file.h"
-#include "assert.h"
+#include "crown_assert.h"
 #include "log.h"
 
 namespace crown

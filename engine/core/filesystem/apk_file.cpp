@@ -29,7 +29,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 #if CROWN_PLATFORM_ANDROID
 
 #include "apk_file.h"
-#include "assert.h"
+#include "crown_assert.h"
 #include "macros.h"
 #include <android/asset_manager.h>
 

@@ -27,7 +27,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 #pragma once
 
 #include "config.h"
-#include "assert.h"
+#include "crown_assert.h"
 #include "mutex.h"
 
 #if CROWN_PLATFORM_POSIX

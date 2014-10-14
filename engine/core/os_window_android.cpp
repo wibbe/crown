@@ -29,7 +29,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 #if CROWN_PLATFORM_ANDROID
 
 #include "os_window_android.h"
-#include "assert.h"
+#include "crown_assert.h"
 #include "log.h"
 
 namespace crown

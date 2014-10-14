@@ -29,7 +29,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 #include <cstring>
 #include "container_types.h"
 #include "array.h"
-#include "assert.h"
+#include "crown_assert.h"
 
 namespace crown
 {

@@ -26,7 +26,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 #pragma once
 
-#include "assert.h"
+#include "crown_assert.h"
 #include "array.h"
 
 namespace crown

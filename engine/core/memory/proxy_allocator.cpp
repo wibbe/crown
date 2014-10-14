@@ -24,7 +24,7 @@ FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 OTHER DEALINGS IN THE SOFTWARE.
 */
 
-#include "assert.h"
+#include "crown_assert.h"
 #include "proxy_allocator.h"
 #include "string_utils.h"
 #include "mutex.h"

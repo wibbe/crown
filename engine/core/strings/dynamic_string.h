@@ -29,7 +29,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 #include <algorithm>
 #include <cstring>
 
-#include "assert.h"
+#include "crown_assert.h"
 #include "memory.h"
 #include "string_utils.h"
 #include "array.h"

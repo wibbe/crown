@@ -31,7 +31,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 #include "vector.h"
 #include "dynamic_string.h"
 #include "string_utils.h"
-#include "assert.h"
+#include "crown_assert.h"
 
 #if CROWN_PLATFORM_POSIX
 	#include <cstdarg>
@@ -53,11 +53,17 @@ OTHER DEALINGS IN THE SOFTWARE.
 #if CROWN_PLATFORM_ANDROID
 	#include <android/log.h>
 #endif
+#if CROWN_PLATFORM_OSX
+	#include <mach/mach_time.h>
+#endif
 
 namespace crown
 {
 
 #if CROWN_PLATFORM_LINUX
+	const size_t	MAX_PATH_LENGTH = 1024;
+	const char		PATH_SEPARATOR = '/';
+#elif CROWN_PLATFORM_OSX
 	const size_t	MAX_PATH_LENGTH = 1024;
 	const char		PATH_SEPARATOR = '/';
 #elif CROWN_PLATFORM_WINDOWS
@@ -359,7 +365,18 @@ namespace os
 
 	inline int64_t clocktime()
 	{
-#if CROWN_PLATFORM_POSIX
+#if CROWN_PLATFORM_OSX
+	// Get the timebase info
+	mach_timebase_info_data_t info;
+	mach_timebase_info(&info);
+
+	uint64_t ttime = mach_absolute_time();
+
+	// Convert to nanoseconds
+	ttime *= info.numer;
+	ttime /= info.denom;
+	return (int64_t)ttime;
+#elif CROWN_PLATFORM_POSIX
 		timespec ttime;
 		clock_gettime(CLOCK_MONOTONIC, &ttime);
 		return ttime.tv_sec * int64_t(1000000000) + ttime.tv_nsec;

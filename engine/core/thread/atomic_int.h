@@ -45,7 +45,7 @@ struct AtomicInt
 
 	int load() const
 	{
-#if CROWN_PLATFORM_POSIX && CROWN_COMPILER_GCC
+#if CROWN_PLATFORM_POSIX && (CROWN_COMPILER_GCC || CROWN_COMPILER_CLANG)
 		__sync_fetch_and_add(&m_val, 0);
 		return m_val;
 #elif CROWN_PLATFORM_WINDOWS
@@ -56,7 +56,7 @@ struct AtomicInt
 
 	void store(int val)
 	{
-#if CROWN_PLATFORM_POSIX && CROWN_COMPILER_GCC
+#if CROWN_PLATFORM_POSIX && (CROWN_COMPILER_GCC || CROWN_COMPILER_CLANG)
 		__sync_lock_test_and_set(&m_val, val);
 #elif CROWN_PLATFORM_WINDOWS
 		InterlockedExchange(&m_val, val);
@@ -65,7 +65,7 @@ struct AtomicInt
 
 private:
 
-#if CROWN_PLATFORM_POSIX && CROWN_COMPILER_GCC
+#if CROWN_PLATFORM_POSIX && (CROWN_COMPILER_GCC || CROWN_COMPILER_CLANG)
 	mutable int m_val;
 #elif CROWN_PLATFORM_WINDOWS
 	mutable LONG m_val;

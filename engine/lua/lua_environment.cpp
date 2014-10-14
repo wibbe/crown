@@ -26,7 +26,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 
 #include "config.h"
-#include "assert.h"
+#include "crown_assert.h"
 #include "lua_environment.h"
 #include "lua_stack.h"
 #include "lua_resource.h"

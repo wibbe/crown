@@ -47,6 +47,7 @@ namespace string_stream
 	StringStream& operator<<(StringStream& s, uint32_t val);
 	StringStream& operator<<(StringStream& s, int64_t val);
 	StringStream& operator<<(StringStream& s, uint64_t val);
+	StringStream& operator<<(StringStream& s, size_t val);
 	StringStream& operator<<(StringStream& s, float val);
 	StringStream& operator<<(StringStream& s, double val);
 
@@ -94,6 +95,12 @@ namespace string_stream
 
 	//-----------------------------------------------------------------------------
 	inline StringStream& operator<<(StringStream& s, uint64_t val)
+	{
+		return stream_printf(s, "%llu", val);
+	}
+
+	//-----------------------------------------------------------------------------
+	inline StringStream& operator<<(StringStream& s, size_t val)
 	{
 		return stream_printf(s, "%llu", val);
 	}

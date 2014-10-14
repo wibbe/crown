@@ -28,7 +28,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 #include "file.h" // FileOpenMode
 #include "types.h"
-#include "assert.h"
+#include "crown_assert.h"
 #include "macros.h"
 #include "config.h"
 

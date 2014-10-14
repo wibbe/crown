@@ -41,6 +41,7 @@ newoption
 	{
 		{ "android", "Android (ARM only)" },			-- gcc
 		{ "linux-gcc", "Linux (GCC compiler)" },		-- gcc
+		{ "osx-gcc", "Mac OS X (GCC compiler)" },		-- gcc
 	}
 }
 
@@ -49,9 +50,9 @@ CROWN_THIRD_DIR = CROWN_SOURCE_DIR .. "third/"
 CROWN_BUILD_DIR = CROWN_SOURCE_DIR .. ".build/"
 CROWN_INSTALL_DIR = os.getenv("CROWN_INSTALL_DIR")
 if not CROWN_INSTALL_DIR then
-	if not path.isabsolute(CROWN_INSTALL_DIR) then
+	--if not path.isabsolute(CROWN_INSTALL_DIR) then
 		CROWN_INSTALL_DIR = CROWN_SOURCE_DIR .. ".install"
-	end
+	--end
 end
 CROWN_INSTALL_DIR = CROWN_INSTALL_DIR .. "/" -- Add slash to end string
 
@@ -96,6 +97,14 @@ solution "crown"
 
 			location(CROWN_BUILD_DIR .. "android")
 
+		elseif _OPTIONS["compiler"] == "osx-gcc" then
+			if not os.is("macosx") then print("Action not valid in current OS.") end
+
+			if not os.getenv("PHYSX_SDK_OSX") then
+				print("Set PHYSX_SDK_OSX environment variable.")
+			end
+
+			location(CROWN_BUILD_DIR .. "osx")
 		end
 	end
 
@@ -383,6 +392,144 @@ solution "crown"
 			postbuildcommands {
 				"cp " .. CROWN_THIRD_DIR .. "bgfx/.build/linux64_gcc/bin/shadercRelease " .. CROWN_INSTALL_DIR .. "bin/linux64/shaderc"
 			}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		configuration { "macosx*" }
+			kind "ConsoleApp"
+
+			buildoptions {
+				"-std=c++03",
+				"-Wall",
+				-- "-Wextra",
+				-- "-Werror",
+				-- "-pedantic",
+				"-Wno-unknown-pragmas"
+			}
+			
+			--linkoptions {
+			--	"-Wl,-rpath=\\$$ORIGIN",
+			--	"-Wl,--no-as-needed"
+			--}
+
+			links {
+				"Cocoa.framework",
+				"OpenGL.framework",
+				"OpenAL.framework",
+				"Foundation.framework",
+				"pthread",
+				"luajit",
+
+				--"Xrandr",
+				--"pthread",
+				--"GL",
+				--"X11",
+				--"openal",
+				--"luajit",
+				--"dl",
+			}
+
+			includedirs {
+				CROWN_THIRD_DIR .. "luajit/src",
+				CROWN_THIRD_DIR .. "openal/include",
+				CROWN_THIRD_DIR .. "freetype",
+				CROWN_THIRD_DIR .. "stb_image",
+				CROWN_THIRD_DIR .. "stb_vorbis",
+				CROWN_THIRD_DIR .. "bgfx/src",
+				CROWN_THIRD_DIR .. "bgfx/include",
+				CROWN_THIRD_DIR .. "bx/include",
+				"$(PHYSX_SDK_OSX)/Include",
+				"$(PHYSX_SDK_OSX)/Include/common",
+				"$(PHYSX_SDK_OSX)/Include/characterkinematic",
+				"$(PHYSX_SDK_OSX)/Include/cloth",
+				"$(PHYSX_SDK_OSX)/Include/common",
+				"$(PHYSX_SDK_OSX)/Include/cooking",
+				"$(PHYSX_SDK_OSX)/Include/extensions",
+				"$(PHYSX_SDK_OSX)/Include/foundation",
+				"$(PHYSX_SDK_OSX)/Include/geometry",
+				"$(PHYSX_SDK_OSX)/Include/particles",
+				"$(PHYSX_SDK_OSX)/Include/physxprofilesdk",
+				"$(PHYSX_SDK_OSX)/Include/physxvisualdebuggersdk",
+				"$(PHYSX_SDK_OSX)/Include/pvd",
+				"$(PHYSX_SDK_OSX)/Include/pxtask",
+				"$(PHYSX_SDK_OSX)/Include/RepX",
+				"$(PHYSX_SDK_OSX)/Include/RepXUpgrader",
+				"$(PHYSX_SDK_OSX)/Include/vehicle",
+			}
+
+		configuration { "macosx*", "debug" }
+			buildoptions {
+				"-O0"
+			}
+
+			links {
+				"bgfxDebug",
+				"LowLevelClothCHECKED",
+				"PhysX3CHECKED",
+				"PhysX3CommonCHECKED",
+				"PxTaskCHECKED",
+				"LowLevelCHECKED",
+				"PhysX3CharacterKinematicCHECKED",
+				"PhysX3CookingCHECKED",
+				"PhysX3ExtensionsCHECKED",
+				"PhysX3VehicleCHECKED",
+				"PhysXProfileSDKCHECKED",
+				"PhysXVisualDebuggerSDKCHECKED",
+				"PvdRuntimeCHECKED",
+				"SceneQueryCHECKED",
+				"SimulationControllerCHECKED",
+			}
+
+			linkoptions {
+				"-rdynamic",
+			}	
+
+		configuration { "macosx*", "x64" }
+			targetdir(CROWN_INSTALL_DIR .. "bin/osx64")
+
+			libdirs {
+				CROWN_THIRD_DIR .. "luajit/src",
+				CROWN_THIRD_DIR .. "bgfx/.build/osx64_gcc/bin",
+				"$(PHYSX_SDK_OSX)/Lib/osx64"
+			}
+
+			postbuildcommands {
+				"cp " .. CROWN_THIRD_DIR .. "luajit/src/luajit " .. CROWN_INSTALL_DIR .. "bin/osx64/",
+				"cp " .. CROWN_THIRD_DIR .. "luajit/src/jit " .. CROWN_INSTALL_DIR .. "bin/osx64/" .. " -r",
+			}
+
+		configuration { "debug or development", "x64", "macosx*" }
+			postbuildcommands {
+				"cp " .. CROWN_THIRD_DIR .. "bgfx/.build/osx64_gcc/bin/shadercDebug " .. CROWN_INSTALL_DIR .. "bin/osx64/shaderc"
+			}
+
+
+
+
+
+
+
+
+
+
+
+
 
 		configuration { "android" }
 			kind "ConsoleApp"

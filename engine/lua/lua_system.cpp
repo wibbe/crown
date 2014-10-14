@@ -28,7 +28,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 #include "lua.hpp"
 #include "config.h"
 #include "lua_stack.h"
-#include "assert.h"
+#include "crown_assert.h"
 #include "vector2.h"
 #include "vector3.h"
 #include "matrix4x4.h"

@@ -414,6 +414,10 @@ solution "crown"
 		configuration { "macosx*" }
 			kind "ConsoleApp"
 
+			files {
+				CROWN_SOURCE_DIR .. "engine/main/main_osx.mm",
+			}
+
 			buildoptions {
 				"-std=c++03",
 				"-Wall",
@@ -511,7 +515,7 @@ solution "crown"
 
 			postbuildcommands {
 				"cp " .. CROWN_THIRD_DIR .. "luajit/src/luajit " .. CROWN_INSTALL_DIR .. "bin/osx64/",
-				"cp " .. CROWN_THIRD_DIR .. "luajit/src/jit " .. CROWN_INSTALL_DIR .. "bin/osx64/" .. " -r",
+				"cp -r " .. CROWN_THIRD_DIR .. "luajit/src/jit " .. CROWN_INSTALL_DIR .. "bin/osx64/",
 			}
 
 		configuration { "debug or development", "x64", "macosx*" }

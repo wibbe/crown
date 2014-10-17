@@ -15,8 +15,6 @@ luajit-linux32:
 	make -R -C third/luajit CC="gcc -m32" BUILDMODE="static"
 luajit-linux64:
 	make -R -C third/luajit CC="gcc -m64" BUILDMODE="static"
-luajit-osx32:
-	make -R -C third/luajit CC="gcc -m32" CCOPT_x86="" BUILDMODE="static"
 luajit-osx64:
 	make -R -C third/luajit CC="gcc" CCOPT_x86="" BUILDMODE="static"
 luajit-windows32:
@@ -39,12 +37,8 @@ bgfx-linux-release32:
 	make -R -C third/bgfx linux-release32
 bgfx-linux-release64:
 	make -R -C third/bgfx linux-release64
-bgfx-osx-debug32:
-	make -R -C third/bgfx osx-debug32
 bgfx-osx-debug64:
 	make -R -C third/bgfx osx-debug64
-bgfx-osx-release32:
-	make -R -C third/bgfx osx-release32
 bgfx-osx-release64:
 	make -R -C third/bgfx osx-release64
 bgfx-vs2012-debug32:
@@ -66,9 +60,7 @@ deps-linux-debug32: luajit-linux32 bgfx-linux-debug32
 deps-linux-debug64: luajit-linux64 bgfx-linux-debug64
 deps-linux-release32: luajit-linux32 bgfx-linux-release32
 deps-linux-release64: luajit-linux64 bgfx-linux-release64
-deps-osx-debug32: luajit-osx32 bgfx-osx-debug32
 deps-osx-debug64: luajit-osx64 bgfx-osx-debug64
-deps-osx-release32: luajit-osx32 bgfx-osx-release32
 deps-osx-release64: luajit-osx64 bgfx-osx-release64
 deps-windows-debug32: luajit-windows32 bgfx-vs2012-debug32
 deps-windows-debug64: luajit-windows64 bgfx-vs2012-debug64

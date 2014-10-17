@@ -29,6 +29,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 #include "temp_allocator.h"
 #include "disk_file.h"
 #include "vector.h"
+#include "log.h"
 
 namespace crown
 {
@@ -37,6 +38,7 @@ namespace crown
 DiskFilesystem::DiskFilesystem()
 {
 	os::getcwd(m_root_path, MAX_PATH_LENGTH);
+	CE_LOGI("Got root path: %s", m_root_path);
 }
 
 //-----------------------------------------------------------------------------
@@ -44,6 +46,7 @@ DiskFilesystem::DiskFilesystem(const char* root_path)
 {
 	CE_ASSERT_NOT_NULL(root_path);
 	string::strncpy(m_root_path, root_path, MAX_PATH_LENGTH);
+	CE_LOGI("Set root path: %s", m_root_path);
 }
 
 //-----------------------------------------------------------------------------
@@ -169,12 +172,18 @@ void DiskFilesystem::get_absolute_path(const char* path, DynamicString& os_path)
 	if (os::is_absolute_path(path))
 	{
 		os_path = path;
+		CE_LOGI("No change: %s", os_path.c_str());
 		return;
 	}
+
+	CE_LOGI("Pre path: %s", os_path.c_str());
+	CE_LOGI("Root: %s", m_root_path);
 
 	os_path += m_root_path;
 	os_path += PATH_SEPARATOR;
 	os_path += path;
+
+	CE_LOGI("Changed: %s -> %s", path, os_path.c_str());
 }
 
 } // namespace crown

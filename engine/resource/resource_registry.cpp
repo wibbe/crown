@@ -102,6 +102,7 @@ static const ResourceCallback* find_callback(uint64_t type)
 	}
 
 	CE_ASSERT_NOT_NULL(c);
+	CE_ASSERT(c->type != 0, "No compiler found for type");
 	return c;
 }
 

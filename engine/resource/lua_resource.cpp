@@ -67,6 +67,8 @@ namespace lua_resource
 			NULL
 		};
 
+		CE_LOGI("Compiling %s -> %s", res_abs_path.c_str(), bc_abs_path.c_str());
+
 		os::execute_process(luajit);
 
 		size_t program_size = 0;
